@@ -61,9 +61,11 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     {
 
         if (is_array($collection)) {
-
             $this->elements = $collection;
             $this->size = count($collection);
+        } else if ($collection instanceof static) {
+            $this->elements = $collection->elements;
+            $this->size = $collection->size;
         }
 
     }

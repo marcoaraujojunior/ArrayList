@@ -85,15 +85,15 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Appends the specified element to the end of this list.
      * 
-     * @param mixed $element
-     * @return \ArrayList
+     * @param mixed $element element to be appended to this list
+     * @return boolean true.
      */
     public function add($element)
     {
 
         $this->elements[$this->size++] = $element;
 
-        return $this;
+        return true;
 
     }
 
@@ -101,8 +101,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Appends all of the elements in the specified collection to the end of 
      * this list.
      * 
-     * @param array|\ArrayList $collection
-     * @return \ArrayList
+     * @param array|\ArrayList $collection collection containing elements to be 
+     * added to this list
+     * @return boolean true if this list changed as a result of the call.
      */
     public function addAll($collection)
     {
@@ -116,7 +117,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         array_splice($this->elements, $this->size, $numAdded, $collection);
         $this->size += $numAdded;
 
-        return $this;
+        return $numAdded !== 0;
 
     }
 
@@ -124,9 +125,11 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Inserts all of the elements in the specified collection into this list, 
      * starting at the specified position.
      * 
-     * @param int $index
-     * @param array|\ArrayList $collection
-     * @return \ArrayList
+     * @param int $index index at which to insert the first element from the 
+     * specified collection
+     * @param array|\ArrayList $collection collection containing elements to be 
+     * added to this list
+     * @return boolean true if this list changed as a result of the call.
      */
     public function addAllAt($index, $collection)
     {
@@ -142,16 +145,15 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         array_splice($this->elements, $index, 0, $collection);
         $this->size += $numAdded;
 
-        return $this;
+        return $numAdded !== 0;
 
     }
 
     /**
      * Inserts the specified element at the specified position in this list.
      * 
-     * @param int $index
-     * @param mixed $element
-     * @return \ArrayList
+     * @param int $index index at which the specified element is to be inserted
+     * @param mixed $element element to be inserted
      */
     public function addAt($index, $element)
     {
@@ -160,8 +162,6 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
 
         array_splice($this->elements, $index, 0, $element);
         $this->size++;
-
-        return $this;
 
     }
 
@@ -179,8 +179,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns true if this list contains the specified element.
      * 
-     * @param mixed $element
-     * @return boolean
+     * @param mixed $element element whose presence in this list is to be tested
+     * @return boolean true if this list contains the specified element.
      */
     public function contains($element)
     {
@@ -192,8 +192,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns the element at the specified position in this list.
      * 
-     * @param int $index
-     * @return mixed
+     * @param int $index index of the element to return
+     * @return mixed the element at the specified position in this list.
      */
     public function get($index)
     {
@@ -208,8 +208,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Returns the index of the first occurrence of the specified element in 
      * this list, or -1 if this list does not contain the element.
      * 
-     * @param mixed $element
-     * @return int
+     * @param mixed $element element to search for
+     * @return int the index of the first occurrence of the specified element in 
+     * this list, or -1 if this list does not contain the element.
      */
     public function indexOf($element)
     {
@@ -227,7 +228,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns true if this list contains no elements.
      * 
-     * @return boolean
+     * @return boolean true if this list contains no elements.
      */
     public function isEmpty()
     {
@@ -240,8 +241,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Returns the index of the last occurrence of the specified element in this 
      * list, or -1 if this list does not contain the element.
      * 
-     * @param mixed $element
-     * @return int
+     * @param mixed $element element to search for
+     * @return int the index of the last occurrence of the specified element in 
+     * this list, or -1 if this list does not contain the element.
      */
     public function lastIndexOf($element)
     {
@@ -291,8 +293,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Removes the first occurrence of the specified element from this list, if 
      * it is present.
      * 
-     * @param mixed $element
-     * @return boolean
+     * @param mixed $element element to be removed from this list, if present
+     * @return boolean true if this list contained the specified element.
      */
     public function remove($element)
     {
@@ -312,7 +314,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Removes from this list all of its elements that are contained in the 
      * specified collection.
      * 
-     * @param array|\ArrayList $collection
+     * @param array|\ArrayList $collection collection containing elements to be 
+     * removed from this list
+     * @return boolean true if this list changed as a result of the call.
      */
     public function removeAll($collection)
     {
@@ -324,20 +328,26 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         $this->elements = array_diff($this->elements, $collection);
         $this->size = count($this->elements);
 
+        return count($collection) > 0;
+
     }
 
     /**
      * Removes the element at the specified position in this list.
      * 
-     * @param int $index
+     * @param int $index the index of the element to be removed
+     * @return mixed the element that was removed from the list.
      */
     public function removeAt($index)
     {
 
         $this->rangeCheck($index);
 
+        $old = $this->elements[$index];
         array_splice($this->elements, $index, 1);
         $this->size--;
+
+        return $old;
 
     }
 
@@ -345,8 +355,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Removes from this list all of the elements whose index is between 
      * fromIndex, inclusive, and toIndex, exclusive.
      * 
-     * @param int $fromIndex
-     * @param int $toIndex
+     * @param int $fromIndex index of first element to be removed
+     * @param int $toIndex index after last element to be removed
      */
     public function removeRange($fromIndex, $toIndex)
     {
@@ -362,9 +372,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Replaces the element at the specified position in this list with the 
      * specified element.
      * 
-     * @param int $index
-     * @param mixed $element
-     * @return mixed
+     * @param int $index index of the element to replace
+     * @param mixed $element element to be stored at the specified position
+     * @return mixed the element previously at the specified position.
      */
     public function set($index, $element)
     {
@@ -373,6 +383,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
 
         $old = $this->elements[$index];
         $this->elements[$index] = $element;
+
         return $old;
 
     }
@@ -380,7 +391,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns the number of elements in this list.
      * 
-     * @return int
+     * @return int the number of elements in this list.
      */
     public function size()
     {
@@ -393,9 +404,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Returns a new list between the specified fromIndex, inclusive, and 
      * toIndex, exclusive.
      * 
-     * @param int $fromIndex
-     * @param int $toIndex
-     * @return \ArrayList
+     * @param int $fromIndex low endpoint (inclusive) of the subList
+     * @param int $toIndex high endpoint (exclusive) of the subList
+     * @return \ArrayList a new list of the specified range within this list.
      */
     public function sublist($fromIndex, $toIndex)
     {
@@ -407,7 +418,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns an array containing all of the elements in this list.
      * 
-     * @return mixed[]
+     * @return mixed[] an array containing the elements of the list.
      */
     public function toArray()
     {
@@ -416,31 +427,29 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
 
     }
 
-    /* ArrayAccess */
-
     /**
-     * Checks if an offset exists.
+     * Returns true if this index exists.
      * 
-     * @param int $offset
-     * @return boolean
+     * @param int $index offset to check
+     * @return boolean true if this index exists.
      */
-    public function offsetExists($offset)
+    public function offsetExists($index)
     {
 
-        return array_key_exists($offset, $this->elements);
+        return array_key_exists($index, $this->elements);
 
     }
 
     /**
      * Returns the element at the specified position in this list.
      * 
-     * @param int $offset
-     * @return mixed
+     * @param int $index index of the element to return
+     * @return mixed the element at the specified position in this list.
      */
-    public function offsetGet($offset)
+    public function offsetGet($index)
     {
 
-        return $this->get($offset);
+        return $this->get($index);
 
     }
 
@@ -448,16 +457,16 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Replaces the element at the specified position in this list with the 
      * specified element.
      * 
-     * @param int $offset
-     * @param mixed $value
+     * @param int $index index of the element to replace
+     * @param mixed $element element to be stored at the specified position
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($index, $element)
     {
 
-        if ($offset === null) {
-            $this->add($value);
+        if ($index === null) {
+            $this->add($element);
         } else {
-            $this->set($offset, $value);
+            $this->set($index, $element);
         }
 
     }
@@ -465,19 +474,19 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Removes the element at the specified position in this list.
      * 
-     * @param int $offset
+     * @param int $index the index of the element to be removed
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($index)
     {
 
-        $this->removeAt($offset);
+        $this->removeAt($index);
 
     }
 
     /**
      * Returns the number of elements in this list.
      * 
-     * @return int
+     * @return int the number of elements in this list.
      */
     public function count()
     {
@@ -489,7 +498,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns an iterator over the elements in this list.
      * 
-     * @return \ArrayIterator
+     * @return \ArrayIterator an iterator over the elements in this list.
      */
     public function getIterator()
     {
@@ -499,9 +508,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
-     * Generates a string representation of this list.
+     * Returns the string representation of this list.
      * 
-     * @return string
+     * @return string the string representation of this list.
      */
     public function serialize()
     {
@@ -514,9 +523,9 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
-     * Constructs the list.
+     * Called during unserialization of this list.
      * 
-     * @param string $serialized
+     * @param string $serialized the string representation of this list
      */
     public function unserialize($serialized)
     {

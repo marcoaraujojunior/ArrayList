@@ -53,6 +53,22 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testAddAll()
+    {
+
+        $arr = new ArrayList([1, 2, 3, 4]);
+
+        $this->assertEquals($arr->size(), 4);
+        $this->assertEquals($arr, '[1, 2, 3, 4]');
+
+        $arr->addAll([5, 6]);
+        $arr->addAll(new ArrayList([7, 8]));
+
+        $this->assertEquals($arr->size(), 8);
+        $this->assertEquals($arr, '[1, 2, 3, 4, 5, 6, 7, 8]');
+
+    }
+
     public function testAddAt()
     {
 
@@ -251,6 +267,21 @@ class ArrTest extends PHPUnit_Framework_TestCase
         $arr->remove(3);
         $this->assertEquals($arr, '[2, 4]');
         $this->assertEquals($arr->size(), 2);
+
+    }
+
+    public function testRemoveAll()
+    {
+
+        $arr = new ArrayList([1, 2, 3, 3, 4, 5, 6]);
+
+        $this->assertEquals($arr, '[1, 2, 3, 3, 4, 5, 6]');
+        $this->assertEquals($arr->size(), 7);
+
+        $arr->removeAll([1, 3, 5]);
+
+        $this->assertEquals($arr, '[2, 4, 6]');
+        $this->assertEquals($arr->size(), 3);
 
     }
 

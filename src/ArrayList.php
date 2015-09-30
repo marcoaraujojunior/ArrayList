@@ -98,6 +98,29 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Appends all of the elements in the specified collection to the end of 
+     * this list.
+     * 
+     * @param array|\ArrayList $collection
+     * @return \ArrayList
+     */
+    public function addAll($collection)
+    {
+
+        $numAdded = count($collection);
+
+        if ($collection instanceof static) {
+            $collection = $collection->toArray();
+        }
+
+        array_splice($this->elements, $this->size, $numAdded, $collection);
+        $this->size += $numAdded;
+
+        return $this;
+
+    }
+
+    /**
      * Inserts the specified element at the specified position in this list.
      * 
      * @param int $index
@@ -256,6 +279,24 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         }
 
         return false;
+
+    }
+
+    /**
+     * Removes from this list all of its elements that are contained in the 
+     * specified collection.
+     * 
+     * @param array|\ArrayList $collection
+     */
+    public function removeAll($collection)
+    {
+
+        if ($collection instanceof static) {
+            $collection = $collection->toArray();
+        }
+
+        $this->elements = array_diff($this->elements, $collection);
+        $this->size = count($this->elements);
 
     }
 

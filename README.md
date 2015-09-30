@@ -34,6 +34,47 @@ $numbers = new ArrayList([1, 2, 3, 4]);
 echo $numbers->size(); // 4
 ```
 
+## Getting and Setting Indices
+
+### get(int index)
+
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+echo $numbers->get(3); // 4
+```
+
+### set(int index, mixed element)
+
+```php
+$numbers = new ArrayList([1, 2, 3, 0]);
+$old = $numbers->set(3, 4);
+echo $numbers; // [1, 2, 3, 4]
+```
+
+## Searching
+
+### contains(mixed element)
+
+```php
+$fruits = new ArrayList(['apples', 'oranges', 'bananas']);
+var_dump($fruits->contains('apples')); // bool(true)
+var_dump($fruits->contains('pears')); // bool(false)
+```
+
+### indexOf(mixed element)
+
+```php
+$fruits = new ArrayList('apples', 'oranges', 'bananas');
+var_dump($fruits->indexOf('apples')); // int(0)
+```
+
+### lastIndexOf(mixed element)
+
+```php
+$fruits = new ArrayList(['apples', 'oranges', 'bananas', 'apples']);
+var_dump($fruits->lastIndexOf('apples')); // int(3)
+```
+
 ## Adding Elements
 
 ### Single Element
@@ -163,4 +204,19 @@ echo count($letters); // 4
 
 ### IteratorAggregate
 
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+foreach ($numbers as $number) echo $number; // 1234
+```
+
 ### Serializable
+
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+echo $numbers; // [1, 2, 3, 4]
+$serialized = serialize($numbers);
+unset($numbers);
+var_dump(isset($numbers)); // bool(false)
+$numbers = unserialize($serialized);
+echo $numbers; // [1, 2, 3, 4]
+```

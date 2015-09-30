@@ -401,6 +401,24 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Sorts this list according to the order induced by the specified callback.
+     * 
+     * @param callable $sort the callback used to compare list elements. A null 
+     * value indicates that the elements' natural ordering should be used.
+     */
+    public function sort(callable $comparator = null)
+    {
+
+        if ($comparator === null) {
+            sort($this->elements);
+            return;
+        }
+
+        usort($this->elements, $comparator);
+
+    }
+
+    /**
      * Returns a new list between the specified fromIndex, inclusive, and 
      * toIndex, exclusive.
      * 

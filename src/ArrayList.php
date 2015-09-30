@@ -509,6 +509,26 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Compares the specified list with this list for equality.
+     * 
+     * @param array|\ArrayList $collection the object to be compared for 
+     * equality with this list
+     * @return boolean true if the specified object is equal to this list.
+     */
+    public function equals($collection)
+    {
+
+        if (is_array($collection)) {
+            return $this->elements === $collection && $this->size === count($collection);
+        } else if ($collection instanceof static) {
+            return $this == $collection;
+        }
+
+        return false;
+
+    }
+
+    /**
      * Returns an iterator over the elements in this list.
      * 
      * @return \ArrayIterator an iterator over the elements in this list.

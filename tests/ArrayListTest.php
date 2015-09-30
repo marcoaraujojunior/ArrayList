@@ -192,6 +192,23 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testEquals()
+    {
+
+        $numbers = new ArrayList([1, 3, 3, 4]);
+        $alsoNumbers = new ArrayList($numbers);
+        $letters = new ArrayList(['a', 'b', 'c', 'd']);
+        $alsoLetters = new ArrayList($letters);
+
+        $this->assertTrue($numbers->equals($alsoNumbers));
+        $this->assertTrue($numbers->equals([1, 3, 3, 4]));
+        $this->assertTrue($letters->equals($alsoLetters));
+        $this->assertTrue($letters->equals(['a', 'b', 'c', 'd']));
+        $this->assertFalse($numbers->equals($letters));
+        $this->assertFalse($letters->equals($numbers));
+
+    }
+
     public function testGet()
     {
 

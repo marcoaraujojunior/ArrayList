@@ -58,7 +58,7 @@ By element:
 ```php
 $food = new ArrayList(['Pizza', 'French Fries', 'Bacon']);
 $food->remove('French Fries');
-echo $food; [Pizza, Bacon]
+echo $food; // [Pizza, Bacon]
 ```
 
 By index:
@@ -66,7 +66,7 @@ By index:
 ```php
 $food = new ArrayList(['Pizza', 'French Fries', 'Bacon']);
 $food->removeAt(1);
-echo $food; [Pizza, Bacon]
+echo $food; // [Pizza, Bacon]
 ```
 
 #### Multiple Elements
@@ -76,7 +76,7 @@ By collection:
 ```php
 $food = new ArrayList(['Pizza', 'Sushi', 'Quiche', 'Bacon']);
 $food->removeAll(['Sushi', 'Quiche']);
-echo $food; [Pizza, Bacon]
+echo $food; // [Pizza, Bacon]
 ```
 
 By range:
@@ -84,5 +84,5 @@ By range:
 ```php
 $food = new ArrayList(['Pizza', 'Sushi', 'Quiche', 'Bacon']);
 $food->removeRange(1, 3);
-echo $food; [Pizza, Bacon]
+echo $food; // [Pizza, Bacon]
 ```

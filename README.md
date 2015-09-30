@@ -68,6 +68,16 @@ $old = $numbers->set(3, 4);
 echo $numbers; // [1, 2, 3, 4]
 ```
 
+## Sublist
+
+Get a sublist from another list.
+
+```php
+$cars = new ArrayList(['Mustang', 'Prius', 'PT Cruiser', 'Jeep']);
+$lameCars = $cars->sublist(1, 3);
+echo $lameCars; // [Prius, PT Cruiser]
+```
+
 ## Sorting
 
 `sort(callable comparator)` accepts a comparator function (callback).

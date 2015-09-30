@@ -405,21 +405,41 @@ class ArrTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($arr->size(), 4);
 
     }
-    
-    public function testSublist() {
-        
+
+    public function testSort()
+    {
+
+        $letters = new ArrayList(['b', 'c', 'd', 'a']);
+        $this->assertEquals($letters, '[b, c, d, a]');
+        $letters->sort(function ($a, $b) {
+            return $a == $b ? 0 : $a < $b ? -1 : 1;
+        });
+        $this->assertEquals($letters, '[a, b, c, d]');
+
+        $numbers = new ArrayList([2, 3, 4, 1]);
+        $this->assertEquals($numbers, '[2, 3, 4, 1]');
+        $numbers->sort(function ($a, $b) {
+            return $a == $b ? 0 : $a < $b ? 1 : -1;
+        });
+        $this->assertEquals($numbers, '[4, 3, 2, 1]');
+
+    }
+
+    public function testSublist()
+    {
+
         $arr = new ArrayList([1, 2, 3, 4]);
 
         $this->assertFalse($arr->isEmpty());
         $this->assertEquals($arr->size(), 4);
         $this->assertEquals($arr, '[1, 2, 3, 4]');
-        
+
         $sublist = $arr->sublist(1, 3);
 
         $this->assertFalse($sublist->isEmpty());
         $this->assertEquals($sublist->size(), 2);
         $this->assertEquals($sublist, '[2, 3]');
-        
+
     }
 
     public function testToArray()

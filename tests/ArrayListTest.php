@@ -8,11 +8,23 @@ class ArrTest extends PHPUnit_Framework_TestCase
     public function testConstructor()
     {
 
-        $arr = new ArrayList();
+        $arr1 = new ArrayList();
 
-        $this->assertTrue($arr->isEmpty());
-        $this->assertEquals($arr->size(), 0);
-        $this->assertEquals($arr, '[]');
+        $this->assertTrue($arr1->isEmpty());
+        $this->assertEquals($arr1->size(), 0);
+        $this->assertEquals($arr1, '[]');
+
+        $arr2 = new ArrayList([1, 2, 3]);
+
+        $this->assertFalse($arr2->isEmpty());
+        $this->assertEquals($arr2->size(), 3);
+        $this->assertEquals($arr2, '[1, 2, 3]');
+
+        $arr3 = new ArrayList($arr2);
+
+        $this->assertFalse($arr3->isEmpty());
+        $this->assertEquals($arr3->size(), 3);
+        $this->assertEquals($arr3, '[1, 2, 3]');
 
     }
 
@@ -53,6 +65,46 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($arr, '[1, 2, 3, 4]');
         $this->assertEquals($arr->size(), 4);
+
+        $arr->addAt(4, 5);
+
+        $this->assertEquals($arr, '[1, 2, 3, 4, 5]');
+        $this->assertEquals($arr->size(), 5);
+
+    }
+
+    public function testArrayAccess()
+    {
+
+        $arr = new ArrayList();
+
+        $arr[] = 1;
+
+        $this->assertEquals($arr, '[1]');
+        $this->assertEquals($arr->size(), 1);
+
+        $arr[] = 2;
+        $arr[] = 3;
+        $arr[] = 4;
+
+        $this->assertEquals($arr, '[1, 2, 3, 4]');
+        $this->assertEquals($arr->size(), 4);
+
+        $this->assertTrue(isset($arr[0]));
+        $this->assertTrue(isset($arr[1]));
+        $this->assertTrue(isset($arr[2]));
+        $this->assertTrue(isset($arr[3]));
+        $this->assertFalse(isset($arr[4]));
+
+        unset($arr[2]);
+
+        $this->assertEquals($arr, '[1, 2, 4]');
+        $this->assertEquals($arr->size(), 3);
+
+        $arr[2] = 3;
+
+        $this->assertEquals($arr, '[1, 2, 3]');
+        $this->assertEquals($arr->size(), 3);
 
     }
 
@@ -119,6 +171,21 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
         foreach (range(1, 4) as $n) {
             $this->assertEquals($arr->get($n - 1), $n);
+        }
+
+    }
+
+    public function testGetIterator()
+    {
+
+        $collection = [1, 2, 3, 4];
+
+        $arr = new ArrayList($collection);
+
+        $i = 0;
+        foreach ($arr as $item) {
+            $this->assertEquals($arr->get($i), $collection[$i]);
+            $i++;
         }
 
     }
@@ -206,6 +273,52 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testRemoveRange()
+    {
+
+        $arr = new ArrayList(range(1, 10));
+
+        $this->assertEquals($arr, '[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]');
+
+        $arr->removeRange(4, 6);
+
+        $this->assertEquals($arr, '[1, 2, 3, 4, 7, 8, 9, 10]');
+
+        $arr->removeRange(0, 2);
+
+        $this->assertEquals($arr, '[3, 4, 7, 8, 9, 10]');
+
+        $arr->removeRange(4, 6);
+
+        $this->assertEquals($arr, '[3, 4, 7, 8]');
+
+    }
+
+    public function testSerializable()
+    {
+
+        $arr = new ArrayList([1, 2, 3, 4]);
+
+        $this->assertFalse($arr->isEmpty());
+        $this->assertEquals($arr->size(), 4);
+        $this->assertEquals($arr, '[1, 2, 3, 4]');
+
+        $serialized = serialize($arr);
+
+        $arr->clear();
+
+        $this->assertTrue($arr->isEmpty());
+        $this->assertEquals($arr->size(), 0);
+        $this->assertEquals($arr, '[]');
+
+        $arr = unserialize($serialized);
+
+        $this->assertFalse($arr->isEmpty());
+        $this->assertEquals($arr->size(), 4);
+        $this->assertEquals($arr, '[1, 2, 3, 4]');
+
+    }
+
     public function testSet()
     {
 
@@ -239,6 +352,15 @@ class ArrTest extends PHPUnit_Framework_TestCase
         }
 
         $this->assertEquals($arr->size(), 4);
+
+    }
+
+    public function testToArray()
+    {
+
+        $arr = new ArrayList(range(1, 4));
+
+        $this->assertEquals($arr->toArray(), [1, 2, 3, 4]);
 
     }
 

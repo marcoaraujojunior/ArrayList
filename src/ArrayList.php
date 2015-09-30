@@ -35,7 +35,7 @@
  * @copyright (c) 2015, Michael Scribellito
  * @link https://github.com/mscribellito/String
  */
-class ArrayList implements ArrayAccess, Countable, IteratorAggregate
+class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializable
 {
 
     /**
@@ -107,6 +107,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     public function addAt($index, $element)
     {
 
+        $this->rangeCheckForAdd($index);
+
         array_splice($this->elements, $index, 0, $element);
         $this->size++;
 
@@ -163,8 +165,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     public function indexOf($element)
     {
 
-        for ($i = 0; $i < $this->size(); $i++) {
-            if ($this->get($i) == $element) {
+        for ($i = 0; $i < $this->size; $i++) {
+            if ($this->elements[$i] == $element) {
                 return $i;
             }
         }
@@ -181,7 +183,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     public function isEmpty()
     {
 
-        return $this->size() === 0;
+        return $this->size === 0;
 
     }
 
@@ -195,8 +197,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     public function lastIndexOf($element)
     {
 
-        for ($i = $this->size() - 1; $i >= 0; $i--) {
-            if ($this->get($i) == $element) {
+        for ($i = $this->size - 1; $i >= 0; $i--) {
+            if ($this->elements[$i] == $element) {
                 return $i;
             }
         }
@@ -206,6 +208,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
+     * Checks if the given index is in range. If not, throws an appropriate 
+     * runtime exception.
      * 
      * @param int $index
      * @throws OutOfBoundsException
@@ -214,6 +218,21 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     {
 
         if ($index < 0 || $index >= $this->size) {
+            throw new OutOfBoundsException('Index: ' . $index . ', Size: ' . $this->size);
+        }
+
+    }
+
+    /**
+     * A version of rangeCheck used by addAt and addAll.
+     * 
+     * @param int $index
+     * @throws OutOfBoundsException
+     */
+    protected function rangeCheckForAdd($index)
+    {
+
+        if ($index < 0 || $index > $this->size) {
             throw new OutOfBoundsException('Index: ' . $index . ', Size: ' . $this->size);
         }
 
@@ -248,8 +267,27 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
     public function removeAt($index)
     {
 
+        $this->rangeCheck($index);
+
         array_splice($this->elements, $index, 1);
         $this->size--;
+
+    }
+
+    /**
+     * Removes from this list all of the elements whose index is between 
+     * fromIndex, inclusive, and toIndex, exclusive.
+     * 
+     * @param int $fromIndex
+     * @param int $toIndex
+     */
+    public function removeRange($fromIndex, $toIndex)
+    {
+
+        $numRemoved = $toIndex - $fromIndex;
+
+        array_splice($this->elements, $fromIndex, $numRemoved);
+        $this->size -= $numRemoved;
 
     }
 
@@ -266,7 +304,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 
         $this->rangeCheck($index);
 
-        $old = $this->get($index);
+        $old = $this->elements[$index];
         $this->elements[$index] = $element;
         return $old;
 
@@ -298,6 +336,12 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 
     /* ArrayAccess */
 
+    /**
+     * Checks if an offset exists.
+     * 
+     * @param int $offset
+     * @return boolean
+     */
     public function offsetExists($offset)
     {
 
@@ -305,6 +349,12 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 
     }
 
+    /**
+     * Returns the element at the specified position in this list.
+     * 
+     * @param int $offset
+     * @return mixed
+     */
     public function offsetGet($offset)
     {
 
@@ -312,22 +362,41 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 
     }
 
+    /**
+     * Replaces the element at the specified position in this list with the 
+     * specified element.
+     * 
+     * @param int $offset
+     * @param mixed $value
+     */
     public function offsetSet($offset, $value)
     {
 
-        $this->set($offset, $value);
+        if ($offset === null) {
+            $this->add($value);
+        } else {
+            $this->set($offset, $value);
+        }
 
     }
 
+    /**
+     * Removes the element at the specified position in this list.
+     * 
+     * @param int $offset
+     */
     public function offsetUnset($offset)
     {
 
-        unset($this->elements[$offset]);
+        $this->removeAt($offset);
 
     }
 
-    /* Countable */
-
+    /**
+     * Returns the number of elements in this list.
+     * 
+     * @return int
+     */
     public function count()
     {
 
@@ -335,12 +404,44 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate
 
     }
 
-    /* IteratorAggregate */
-
+    /**
+     * Returns an iterator over the elements in this list.
+     * 
+     * @return \ArrayIterator
+     */
     public function getIterator()
     {
 
         return new ArrayIterator($this->elements);
+
+    }
+
+    /**
+     * Generates a string representation of this list.
+     * 
+     * @return string
+     */
+    public function serialize()
+    {
+
+        return serialize([
+            'elements' => $this->elements,
+            'size' => $this->size
+        ]);
+
+    }
+
+    /**
+     * Constructs the list.
+     * 
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+
+        $data = unserialize($serialized);
+        $this->elements = $data['elements'];
+        $this->size = $data['size'];
 
     }
 

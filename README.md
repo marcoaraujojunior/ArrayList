@@ -1,12 +1,12 @@
 # ArrayList
 
-ArrayList is an implementation of a list, backed by an array.
+`ArrayList` is an implementation of a list, backed by an `array`.
 
 ## Creating an ArrayList
 
 ```php
-$food = new ArrayList(['Pizza', 'French Fries', 'Bacon']);
-echo $food; // [Pizza, French Fries, Bacon]
+$occupants = new ArrayList(['Michael', 'Brittany', 'Wallace', 'Martin']);
+echo $occupants; // [Michael, Brittany, Wallace, Martin]
 ```
 
 ## ArrayList Utility Methods
@@ -109,3 +109,58 @@ $food = new ArrayList(['Pizza', 'Sushi', 'Quiche', 'Bacon']);
 $food->removeRange(1, 3);
 echo $food; // [Pizza, Bacon]
 ```
+
+## Interfaces
+
+`ArrayList` implements the following interfaces:
+
+- ArrayAccess
+- Countable
+- IteratorAggregate
+- Serializable
+
+### ArrayAccess
+
+#### Get
+
+```php
+$letters = new ArrayList(['a', 'b', 'c', 'd']);
+echo $letters[0]; // a
+```
+
+#### Set
+
+```php
+$letters = new ArrayList(['a', 'b', 'c']);
+$letters[] = '?';
+echo $letters; // [a, b, c, ?]
+$letters[3] = 'd';
+echo $letters; // [a, b, c, d]
+```
+
+#### Isset
+
+```php
+$letters = new ArrayList(['a', 'b', 'c', 'd']);
+var_dump(isset($letters[0])); // bool(true)
+var_dump(isset($letters[4])); // bool(false)
+```
+
+#### Unset
+
+```php
+$letters = new ArrayList(['a', 'b', 'c', 'd']);
+unset($letters[3]);
+echo $letters; // [a, b, c]
+```
+
+### Countable
+
+```php
+$letters = new ArrayList(['a', 'b', 'c', 'd']);
+echo count($letters); // 4
+```
+
+### IteratorAggregate
+
+### Serializable

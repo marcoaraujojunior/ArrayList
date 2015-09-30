@@ -4,9 +4,26 @@
 
 ## Creating an ArrayList
 
+Create an empty instance:
+
+```php
+$empty = new ArrayList();
+echo $empty; // []
+```
+
+Create an instance and initialize it with an `array`:
+
 ```php
 $occupants = new ArrayList(['Michael', 'Brittany', 'Wallace', 'Martin']);
 echo $occupants; // [Michael, Brittany, Wallace, Martin]
+```
+
+Create an instance and initialize it with an `ArrayList`:
+
+```php
+$empty = new ArrayList();
+$alsoEmpty = new ArrayList($empty);
+echo $alsoEmpty; // []
 ```
 
 ## ArrayList Utility Methods
@@ -49,6 +66,32 @@ echo $numbers->get(3); // 4
 $numbers = new ArrayList([1, 2, 3, 0]);
 $old = $numbers->set(3, 4);
 echo $numbers; // [1, 2, 3, 4]
+```
+
+## Sorting
+
+`sort(callable comparator)` accepts a comparator function (callback).
+
+Sort lowest to highest:
+
+```php
+$letters = new ArrayList(['b', 'c', 'd', 'a']);
+echo $letters; // [b, c, d, a]
+$letters->sort(function ($a, $b) {
+	return $a == $b ? 0 : $a < $b ? -1 : 1;
+});
+echo $letters; // [a, b, c, d]
+```
+
+Sort highest to lowest:
+
+```php
+$numbers = new ArrayList([2, 3, 4, 1]);
+echo $numbers; // [2, 3, 4, 1]
+$numbers->sort(function ($a, $b) {
+	return $a == $b ? 0 : $a < $b ? 1 : -1;
+});
+echo $numbers; // [4, 3, 2, 1]
 ```
 
 ## Searching

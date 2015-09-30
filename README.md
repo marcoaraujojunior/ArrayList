@@ -9,6 +9,31 @@ $food = new ArrayList(['Pizza', 'French Fries', 'Bacon']);
 echo $food; // [Pizza, French Fries, Bacon]
 ```
 
+## ArrayList Utility Methods
+
+### clear()
+
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+echo $numbers; // [1, 2, 3, 4]
+$numbers->clear();
+echo $numbers; // []
+```
+
+### isEmpty()
+
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+echo $numbers->isEmpty() ? 'empty' : 'not empty'; // not empty
+```
+
+### size()
+
+```php
+$numbers = new ArrayList([1, 2, 3, 4]);
+echo $numbers->size(); // 4
+```
+
 ## Adding Elements
 
 ### Single Element

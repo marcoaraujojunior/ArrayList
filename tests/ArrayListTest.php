@@ -69,6 +69,26 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
     }
 
+    public function testAddAllAt()
+    {
+
+        $arr = new ArrayList([1, 6]);
+
+        $this->assertEquals($arr->size(), 2);
+        $this->assertEquals($arr, '[1, 6]');
+
+        $arr->addAllAt(1, [2, 5]);
+
+        $this->assertEquals($arr->size(), 4);
+        $this->assertEquals($arr, '[1, 2, 5, 6]');
+
+        $arr->addAllAt(2, new ArrayList([3, 4]));
+
+        $this->assertEquals($arr->size(), 6);
+        $this->assertEquals($arr, '[1, 2, 3, 4, 5, 6]');
+
+    }
+
     public function testAddAt()
     {
 
@@ -384,6 +404,22 @@ class ArrTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($arr->size(), 4);
 
+    }
+    
+    public function testSublist() {
+        
+        $arr = new ArrayList([1, 2, 3, 4]);
+
+        $this->assertFalse($arr->isEmpty());
+        $this->assertEquals($arr->size(), 4);
+        $this->assertEquals($arr, '[1, 2, 3, 4]');
+        
+        $sublist = $arr->sublist(1, 3);
+
+        $this->assertFalse($sublist->isEmpty());
+        $this->assertEquals($sublist->size(), 2);
+        $this->assertEquals($sublist, '[2, 3]');
+        
     }
 
     public function testToArray()

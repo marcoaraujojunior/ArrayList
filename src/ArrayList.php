@@ -121,6 +121,32 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Inserts all of the elements in the specified collection into this list, 
+     * starting at the specified position.
+     * 
+     * @param int $index
+     * @param array|\ArrayList $collection
+     * @return \ArrayList
+     */
+    public function addAllAt($index, $collection)
+    {
+
+        $this->rangeCheckForAdd($index);
+
+        $numAdded = count($collection);
+
+        if ($collection instanceof static) {
+            $collection = $collection->toArray();
+        }
+
+        array_splice($this->elements, $index, 0, $collection);
+        $this->size += $numAdded;
+
+        return $this;
+
+    }
+
+    /**
      * Inserts the specified element at the specified position in this list.
      * 
      * @param int $index
@@ -360,6 +386,21 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     {
 
         return $this->size;
+
+    }
+
+    /**
+     * Returns a new list between the specified fromIndex, inclusive, and 
+     * toIndex, exclusive.
+     * 
+     * @param int $fromIndex
+     * @param int $toIndex
+     * @return \ArrayList
+     */
+    public function sublist($fromIndex, $toIndex)
+    {
+
+        return new static(array_slice($this->elements, $fromIndex, $toIndex - 1));
 
     }
 

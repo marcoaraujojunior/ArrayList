@@ -2,18 +2,16 @@
 
 ArrayList is an implementation of a list, backed by an array.
 
-## Usage
-
-### Creating an ArrayList
+## Creating an ArrayList
 
 ```php
 $food = new ArrayList(['Pizza', 'French Fries', 'Bacon']);
 echo $food; // [Pizza, French Fries, Bacon]
 ```
 
-### Adding Elements
+## Adding Elements
 
-#### Single Element
+### Single Element
 
 Add at end of list:
 
@@ -31,7 +29,7 @@ $food->addAt(1, 'Tacos');
 echo $food; // [Pizza, Tacos, French Fries, Bacon]
 ```
 
-#### Multiple Elements
+### Multiple Elements
 
 Add at end of list:
 
@@ -49,9 +47,9 @@ $food->addAllAt(1, ['Burgers', 'Tacos']);
 echo $food; // [Pizza, Burgers, Tacos, French Fries, Bacon]
 ```
 
-### Removing Elements
+## Removing Elements
 
-#### Single Element
+### Single Element
 
 By element:
 
@@ -69,7 +67,7 @@ $food->removeAt(1);
 echo $food; // [Pizza, Bacon]
 ```
 
-#### Multiple Elements
+### Multiple Elements
 
 By collection:
 

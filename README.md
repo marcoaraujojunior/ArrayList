@@ -117,7 +117,7 @@ var_dump($fruits->contains('pears')); // bool(false)
 ### indexOf(mixed element)
 
 ```php
-$fruits = new ArrayList('apples', 'oranges', 'bananas');
+$fruits = new ArrayList(['apples', 'oranges', 'bananas']);
 var_dump($fruits->indexOf('apples')); // int(0)
 ```
 

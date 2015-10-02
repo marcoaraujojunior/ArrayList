@@ -2,6 +2,43 @@
 
 `ArrayList` is an implementation of a list, backed by an `array`.
 
+## API
+
+Method                                  | Description
+----------------------------------------|----------------------
+__construct($collection)                |
+__toString()                            |
+add($element)                           |
+addAll($collection)                     |
+addAllAt($index, $collection)           |
+addAt($index, $element)                 |
+clear()                                 |
+contains($element)                      |
+count()                                 |
+equals($collection)                     |
+get($index)                             |
+getIterator()                           |
+indexOf($element)                       |
+isEmpty()                               |
+lastIndexOf($element)                   |
+offsetExists($index)                    |
+offsetGet($index)                       |
+offsetSet($index, $element)             |
+offsetUnset($index)                     |
+rangeCheck($index)                      |
+rangeCheckForAdd($index)                |
+remove($element)                        |
+removeAll($collection)                  |
+removeAt($index)                        |
+removeRange($fromIndex, $toIndex)       |
+serialize()                             |
+set($index, $element)                   |
+size()                                  |
+sort($comparator)                       |
+sublist($fromIndex, $toIndex)           |
+toArray()                               |
+unserialize($serialized)                |
+
 ## Creating an ArrayList
 
 Create an empty instance:

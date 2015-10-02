@@ -10,34 +10,37 @@ __construct($collection)                | Constructs a list containing the eleme
 __toString()                            | Returns a string representation of this list.
 add($element)                           | Appends the specified element to the end of this list.
 addAll($collection)                     | Appends all of the elements in the specified collection to the end of this list.
-addAllAt($index, $collection)           |
-addAt($index, $element)                 |
-clear()                                 |
-contains($element)                      |
-count()                                 |
-equals($collection)                     |
-get($index)                             |
-getIterator()                           |
-indexOf($element)                       |
-isEmpty()                               |
-lastIndexOf($element)                   |
-offsetExists($index)                    |
-offsetGet($index)                       |
-offsetSet($index, $element)             |
-offsetUnset($index)                     |
-rangeCheck($index)                      |
-rangeCheckForAdd($index)                |
-remove($element)                        |
-removeAll($collection)                  |
-removeAt($index)                        |
-removeRange($fromIndex, $toIndex)       |
-serialize()                             |
-set($index, $element)                   |
-size()                                  |
-sort($comparator)                       |
-sublist($fromIndex, $toIndex)           |
-toArray()                               |
-unserialize($serialized)                |
+addAllAt($index, $collection)           | Inserts all of the elements in the specified collection into this list, starting at the specified position.
+addAt($index, $element)                 | Inserts the specified element at the specified position in this list.
+clear()                                 | Removes all of the elements from this list.
+contains($element)                      | Returns true if this list contains the specified element.
+equals($collection)                     | Compares the specified list with this list for equality.
+get($index)                             | Returns the element at the specified position in this list.
+indexOf($element)                       | Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+isEmpty()                               | Returns true if this list contains no elements.
+lastIndexOf($element)                   | Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
+remove($element)                        | Removes the first occurrence of the specified element from this list, if it is present.
+removeAll($collection)                  | Removes from this list all of its elements that are contained in the specified collection.
+removeAt($index)                        | Removes the element at the specified position in this list.
+removeRange($fromIndex, $toIndex)       | Removes from this list all of the elements whose index is between fromIndex, inclusive, and toIndex, exclusive.
+set($index, $element)                   | Replaces the element at the specified position in this list with the specified element.
+size()                                  | Returns the number of elements in this list.
+sort($comparator)                       | Sorts this list according to the order induced by the specified callback.
+sublist($fromIndex, $toIndex)           | Returns a new list between the specified fromIndex, inclusive, and toIndex, exclusive.
+toArray()                               | Returns an array containing all of the elements in this list.
+
+### Interface
+
+Method                                  | Description
+----------------------------------------|----------------------
+count()                                 | Returns the number of elements in this list.
+getIterator()                           | Returns an iterator over the elements in this list.
+offsetExists($index)                    | Returns true if this index exists.
+offsetGet($index)                       | Returns the element at the specified position in this list.
+offsetSet($index, $element)             | Replaces the element at the specified position in this list with the specified element.
+offsetUnset($index)                     | Removes the element at the specified position in this list.
+serialize()                             | Returns the string representation of this list.
+unserialize($serialized)                | Called during unserialization of this list.
 
 ## Creating an ArrayList
 

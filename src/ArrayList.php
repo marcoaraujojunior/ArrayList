@@ -190,6 +190,38 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Returns the number of elements in this list.
+     * 
+     * @return int the number of elements in this list.
+     */
+    public function count()
+    {
+
+        return $this->size();
+
+    }
+
+    /**
+     * Compares the specified list with this list for equality.
+     * 
+     * @param array|\ArrayList $collection the object to be compared for 
+     * equality with this list
+     * @return boolean true if the specified object is equal to this list.
+     */
+    public function equals($collection)
+    {
+
+        if (is_array($collection)) {
+            return $this->elements === $collection && $this->size === count($collection);
+        } else if ($collection instanceof static) {
+            return $this == $collection;
+        }
+
+        return false;
+
+    }
+
+    /**
      * Returns the element at the specified position in this list.
      * 
      * @param int $index index of the element to return
@@ -201,6 +233,18 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         $this->rangeCheck($index);
 
         return $this->elements[$index];
+
+    }
+
+    /**
+     * Returns an iterator over the elements in this list.
+     * 
+     * @return \ArrayIterator an iterator over the elements in this list.
+     */
+    public function getIterator()
+    {
+
+        return new ArrayIterator($this->elements);
 
     }
 
@@ -255,6 +299,62 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
         }
 
         return -1;
+
+    }
+
+    /**
+     * Returns true if this index exists.
+     * 
+     * @param int $index offset to check
+     * @return boolean true if this index exists.
+     */
+    public function offsetExists($index)
+    {
+
+        return array_key_exists($index, $this->elements);
+
+    }
+
+    /**
+     * Returns the element at the specified position in this list.
+     * 
+     * @param int $index index of the element to return
+     * @return mixed the element at the specified position in this list.
+     */
+    public function offsetGet($index)
+    {
+
+        return $this->get($index);
+
+    }
+
+    /**
+     * Replaces the element at the specified position in this list with the 
+     * specified element.
+     * 
+     * @param int $index index of the element to replace
+     * @param mixed $element element to be stored at the specified position
+     */
+    public function offsetSet($index, $element)
+    {
+
+        if ($index === null) {
+            $this->add($element);
+        } else {
+            $this->set($index, $element);
+        }
+
+    }
+
+    /**
+     * Removes the element at the specified position in this list.
+     * 
+     * @param int $index the index of the element to be removed
+     */
+    public function offsetUnset($index)
+    {
+
+        $this->removeAt($index);
 
     }
 
@@ -369,6 +469,21 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     }
 
     /**
+     * Returns the string representation of this list.
+     * 
+     * @return string the string representation of this list.
+     */
+    public function serialize()
+    {
+
+        return serialize([
+            'elements' => $this->elements,
+            'size' => $this->size
+        ]);
+
+    }
+
+    /**
      * Replaces the element at the specified position in this list with the 
      * specified element.
      * 
@@ -437,121 +552,6 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     {
 
         return $this->elements;
-
-    }
-
-    /**
-     * Returns true if this index exists.
-     * 
-     * @param int $index offset to check
-     * @return boolean true if this index exists.
-     */
-    public function offsetExists($index)
-    {
-
-        return array_key_exists($index, $this->elements);
-
-    }
-
-    /**
-     * Returns the element at the specified position in this list.
-     * 
-     * @param int $index index of the element to return
-     * @return mixed the element at the specified position in this list.
-     */
-    public function offsetGet($index)
-    {
-
-        return $this->get($index);
-
-    }
-
-    /**
-     * Replaces the element at the specified position in this list with the 
-     * specified element.
-     * 
-     * @param int $index index of the element to replace
-     * @param mixed $element element to be stored at the specified position
-     */
-    public function offsetSet($index, $element)
-    {
-
-        if ($index === null) {
-            $this->add($element);
-        } else {
-            $this->set($index, $element);
-        }
-
-    }
-
-    /**
-     * Removes the element at the specified position in this list.
-     * 
-     * @param int $index the index of the element to be removed
-     */
-    public function offsetUnset($index)
-    {
-
-        $this->removeAt($index);
-
-    }
-
-    /**
-     * Returns the number of elements in this list.
-     * 
-     * @return int the number of elements in this list.
-     */
-    public function count()
-    {
-
-        return $this->size();
-
-    }
-
-    /**
-     * Compares the specified list with this list for equality.
-     * 
-     * @param array|\ArrayList $collection the object to be compared for 
-     * equality with this list
-     * @return boolean true if the specified object is equal to this list.
-     */
-    public function equals($collection)
-    {
-
-        if (is_array($collection)) {
-            return $this->elements === $collection && $this->size === count($collection);
-        } else if ($collection instanceof static) {
-            return $this == $collection;
-        }
-
-        return false;
-
-    }
-
-    /**
-     * Returns an iterator over the elements in this list.
-     * 
-     * @return \ArrayIterator an iterator over the elements in this list.
-     */
-    public function getIterator()
-    {
-
-        return new ArrayIterator($this->elements);
-
-    }
-
-    /**
-     * Returns the string representation of this list.
-     * 
-     * @return string the string representation of this list.
-     */
-    public function serialize()
-    {
-
-        return serialize([
-            'elements' => $this->elements,
-            'size' => $this->size
-        ]);
 
     }
 

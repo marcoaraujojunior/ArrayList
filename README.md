@@ -4,30 +4,30 @@
 
 ## API
 
-Method                                  | Description
-----------------------------------------|----------------------
-__construct($collection)                | Constructs a list containing the elements of the specified collection.
-__toString()                            | Returns a string representation of this list.
-add($element)                           | Appends the specified element to the end of this list.
-addAll($collection)                     | Appends all of the elements in the specified collection to the end of this list.
-addAllAt($index, $collection)           | Inserts all of the elements in the specified collection into this list, starting at the specified position.
-addAt($index, $element)                 | Inserts the specified element at the specified position in this list.
-clear()                                 | Removes all of the elements from this list.
-contains($element)                      | Returns true if this list contains the specified element.
-equals($collection)                     | Compares the specified list with this list for equality.
-get($index)                             | Returns the element at the specified position in this list.
-indexOf($element)                       | Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
-isEmpty()                               | Returns true if this list contains no elements.
-lastIndexOf($element)                   | Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
-remove($element)                        | Removes the first occurrence of the specified element from this list, if it is present.
-removeAll($collection)                  | Removes from this list all of its elements that are contained in the specified collection.
-removeAt($index)                        | Removes the element at the specified position in this list.
-removeRange($fromIndex, $toIndex)       | Removes from this list all of the elements whose index is between fromIndex, inclusive, and toIndex, exclusive.
-set($index, $element)                   | Replaces the element at the specified position in this list with the specified element.
-size()                                  | Returns the number of elements in this list.
-sort($comparator)                       | Sorts this list according to the order induced by the specified callback.
-sublist($fromIndex, $toIndex)           | Returns a new list between the specified fromIndex, inclusive, and toIndex, exclusive.
-toArray()                               | Returns an array containing all of the elements in this list.
+Type | Method | Description
+-----|--------|------------
+ | __construct([$collection]) | Constructs a list containing the elements of the specified collection.
+`string` | __toString() | Returns a string representation of this list.
+`boolean` | add($element) | Appends the specified element to the end of this list.
+`boolean` | addAll($collection) | Appends all of the elements in the specified collection to the end of this list.
+`boolean` | addAllAt($index, $collection) | Inserts all of the elements in the specified collection into this list, starting at the specified position.
+`void` | addAt($index, $element) | Inserts the specified element at the specified position in this list.
+`void` | clear() | Removes all of the elements from this list.
+`boolean` | contains($element) | Returns true if this list contains the specified element.
+`boolean` | equals($collection) | Compares the specified list with this list for equality.
+`mixed` | get($index) | Returns the element at the specified position in this list.
+`integer` | indexOf($element) | Returns the index of the first occurrence of the specified element in this list, or -1 if this list does not contain the element.
+`boolean` | isEmpty() | Returns true if this list contains no elements.
+`integer` | lastIndexOf($element) | Returns the index of the last occurrence of the specified element in this list, or -1 if this list does not contain the element.
+`boolean` | remove($element) | Removes the first occurrence of the specified element from this list, if it is present.
+`boolean` | removeAll($collection) | Removes from this list all of its elements that are contained in the specified collection.
+`mixed` | removeAt($index) | Removes the element at the specified position in this list.
+`void` | removeRange($fromIndex, $toIndex) | Removes from this list all of the elements whose index is between fromIndex, inclusive, and toIndex, exclusive.
+`mixed` | set($index, $element) | Replaces the element at the specified position in this list with the specified element.
+`integer` | size() | Returns the number of elements in this list.
+`void` | sort($comparator) | Sorts this list according to the order induced by the specified callback.
+`ArrayList` | sublist($fromIndex, $toIndex) | Returns a new list between the specified fromIndex, inclusive, and toIndex, exclusive.
+`mixed[]` | toArray() | Returns an array containing all of the elements in this list.
 
 ### Interface
 

@@ -1,6 +1,6 @@
 # ArrayList
 
-`ArrayList` is an implementation of a list, backed by an `array`.
+`ArrayList` is an implementation of a list, backed by an `array`. It provides methods for adding, removing, searching and sorting elements.
 
 ## Requirements
 PHP **5.4** or newer is required.

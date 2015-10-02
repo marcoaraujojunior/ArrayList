@@ -14,9 +14,9 @@ Released under the [MIT License](https://opensource.org/licenses/MIT). See [LICE
 
 Constructor | Description
 ------------|------------
-__construct() | Constructs a list containing the elements of the specified collection.
-__construct(mixed[] $collection) | Constructs a list containing the elements of the specified collection.
-__construct(ArrayList $collection) | Constructs a list containing the elements of the specified collection.
+__construct() | Constructs an empty list.
+__construct(`array` $collection) | Constructs a list containing the elements of the specified collection.
+__construct(`ArrayList` $collection) | Constructs a list containing the elements of the specified collection.
 
 ### Method Summary
 

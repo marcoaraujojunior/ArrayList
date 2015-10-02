@@ -86,7 +86,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Appends the specified element to the end of this list.
      * 
      * @param mixed $element element to be appended to this list
-     * @return boolean true.
+     * @return bool true.
      */
     public function add($element)
     {
@@ -103,7 +103,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * 
      * @param array|\ArrayList $collection collection containing elements to be 
      * added to this list
-     * @return boolean true if this list changed as a result of the call.
+     * @return bool true if this list changed as a result of the call.
      */
     public function addAll($collection)
     {
@@ -129,7 +129,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * specified collection
      * @param array|\ArrayList $collection collection containing elements to be 
      * added to this list
-     * @return boolean true if this list changed as a result of the call.
+     * @return bool true if this list changed as a result of the call.
      */
     public function addAllAt($index, $collection)
     {
@@ -154,6 +154,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * 
      * @param int $index index at which the specified element is to be inserted
      * @param mixed $element element to be inserted
+     * @return bool true.
      */
     public function addAt($index, $element)
     {
@@ -162,6 +163,8 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
 
         array_splice($this->elements, $index, 0, $element);
         $this->size++;
+
+        return true;
 
     }
 
@@ -180,7 +183,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Returns true if this list contains the specified element.
      * 
      * @param mixed $element element whose presence in this list is to be tested
-     * @return boolean true if this list contains the specified element.
+     * @return bool true if this list contains the specified element.
      */
     public function contains($element)
     {
@@ -206,7 +209,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * 
      * @param array|\ArrayList $collection the object to be compared for 
      * equality with this list
-     * @return boolean true if the specified object is equal to this list.
+     * @return bool true if the specified object is equal to this list.
      */
     public function equals($collection)
     {
@@ -272,7 +275,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
     /**
      * Returns true if this list contains no elements.
      * 
-     * @return boolean true if this list contains no elements.
+     * @return bool true if this list contains no elements.
      */
     public function isEmpty()
     {
@@ -306,7 +309,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * Returns true if this index exists.
      * 
      * @param int $index offset to check
-     * @return boolean true if this index exists.
+     * @return bool true if this index exists.
      */
     public function offsetExists($index)
     {
@@ -394,7 +397,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * it is present.
      * 
      * @param mixed $element element to be removed from this list, if present
-     * @return boolean true if this list contained the specified element.
+     * @return bool true if this list contained the specified element.
      */
     public function remove($element)
     {
@@ -416,7 +419,7 @@ class ArrayList implements ArrayAccess, Countable, IteratorAggregate, Serializab
      * 
      * @param array|\ArrayList $collection collection containing elements to be 
      * removed from this list
-     * @return boolean true if this list changed as a result of the call.
+     * @return bool true if this list changed as a result of the call.
      */
     public function removeAll($collection)
     {

@@ -10,9 +10,18 @@ Released under the [MIT License](https://opensource.org/licenses/MIT). See [LICE
 
 ## API
 
+### Constructor Summary
+
+Constructor | Description
+------------|------------
+__construct() | Constructs a list containing the elements of the specified collection.
+__construct(mixed[] $collection) | Constructs a list containing the elements of the specified collection.
+__construct(ArrayList $collection) | Constructs a list containing the elements of the specified collection.
+
+### Method Summary
+
 Type | Method | Description
 -----|--------|------------
- | __construct([$collection]) | Constructs a list containing the elements of the specified collection.
 `string` | __toString() | Returns a string representation of this list.
 `bool` | add($element) | Appends the specified element to the end of this list.
 `bool` | addAll($collection) | Appends all of the elements in the specified collection to the end of this list.
@@ -35,16 +44,31 @@ Type | Method | Description
 `ArrayList` | sublist($fromIndex, $toIndex) | Returns a new list between the specified fromIndex, inclusive, and toIndex, exclusive.
 `mixed[]` | toArray() | Returns an array containing all of the elements in this list.
 
-### Interface
+#### Methods inherited from `ArrayAccess`
+
+Type | Method | Description
+-----|--------|------------
+`ArrayIterator` | getIterator() | Returns an iterator over the elements in this list.
+
+#### Methods inherited from `Countable`
 
 Type | Method | Description
 -----|--------|------------
 `int` | count() | Returns the number of elements in this list.
-`ArrayIterator` | getIterator() | Returns an iterator over the elements in this list.
+
+#### Methods inherited from `IteratorAggregate`
+
+Type | Method | Description
+-----|--------|------------
 `bool` | offsetExists($index) | Returns true if this index exists.
 `mixed` | offsetGet($index) | Returns the element at the specified position in this list.
 `void` | offsetSet($index, $element) | Replaces the element at the specified position in this list with the specified element.
 `void` | offsetUnset($index) | Removes the element at the specified position in this list.
+
+#### Methods inherited from `Serializable`
+
+Type | Method | Description
+-----|--------|------------
 `string` | serialize() | Returns the string representation of this list.
 `void` | unserialize($serialized) | Called during unserialization of this list.
 

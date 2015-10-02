@@ -11,7 +11,7 @@ Type | Method | Description
 `bool` | add($element) | Appends the specified element to the end of this list.
 `bool` | addAll($collection) | Appends all of the elements in the specified collection to the end of this list.
 `bool` | addAllAt($index, $collection) | Inserts all of the elements in the specified collection into this list, starting at the specified position.
-`void` | addAt($index, $element) | Inserts the specified element at the specified position in this list.
+`bool` | addAt($index, $element) | Inserts the specified element at the specified position in this list.
 `void` | clear() | Removes all of the elements from this list.
 `bool` | contains($element) | Returns true if this list contains the specified element.
 `bool` | equals($collection) | Compares the specified list with this list for equality.

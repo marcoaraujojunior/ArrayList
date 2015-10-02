@@ -2,6 +2,12 @@
 
 `ArrayList` is an implementation of a list, backed by an `array`.
 
+## Requirements
+PHP **5.4** or newer is required.
+
+## License
+Released under the [MIT License](https://opensource.org/licenses/MIT). See [LICENSE](LICENSE) for details.
+
 ## API
 
 Type | Method | Description
@@ -42,7 +48,9 @@ Type | Method | Description
 `string` | serialize() | Returns the string representation of this list.
 `void` | unserialize($serialized) | Called during unserialization of this list.
 
-## Creating an ArrayList
+## Usage
+
+### Creating an ArrayList
 
 Create an empty instance:
 
@@ -66,9 +74,9 @@ $alsoEmpty = new ArrayList($empty);
 echo $alsoEmpty; // []
 ```
 
-## ArrayList Utility Methods
+### ArrayList Utility Methods
 
-### clear()
+#### clear()
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);
@@ -77,30 +85,30 @@ $numbers->clear();
 echo $numbers; // []
 ```
 
-### isEmpty()
+#### isEmpty()
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);
 echo $numbers->isEmpty() ? 'empty' : 'not empty'; // not empty
 ```
 
-### size()
+#### size()
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);
 echo $numbers->size(); // 4
 ```
 
-## Getting and Setting Indices
+### Getting and Setting Indices
 
-### get(int index)
+#### get(int index)
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);
 echo $numbers->get(3); // 4
 ```
 
-### set(int index, mixed element)
+#### set(int index, mixed element)
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 0]);
@@ -108,7 +116,7 @@ $old = $numbers->set(3, 4);
 echo $numbers; // [1, 2, 3, 4]
 ```
 
-## Sublist
+### Sublist
 
 Get a sublist from another list.
 
@@ -118,7 +126,7 @@ $lameCars = $cars->sublist(1, 3);
 echo $lameCars; // [Prius, PT Cruiser]
 ```
 
-## Sorting
+### Sorting
 
 `sort(callable comparator)` accepts a comparator function (callback).
 
@@ -144,9 +152,9 @@ $numbers->sort(function ($a, $b) {
 echo $numbers; // [4, 3, 2, 1]
 ```
 
-## Searching
+### Searching
 
-### contains(mixed element)
+#### contains(mixed element)
 
 ```php
 $fruits = new ArrayList(['apples', 'oranges', 'bananas']);
@@ -154,23 +162,23 @@ var_dump($fruits->contains('apples')); // bool(true)
 var_dump($fruits->contains('pears')); // bool(false)
 ```
 
-### indexOf(mixed element)
+#### indexOf(mixed element)
 
 ```php
 $fruits = new ArrayList(['apples', 'oranges', 'bananas']);
 var_dump($fruits->indexOf('apples')); // int(0)
 ```
 
-### lastIndexOf(mixed element)
+#### lastIndexOf(mixed element)
 
 ```php
 $fruits = new ArrayList(['apples', 'oranges', 'bananas', 'apples']);
 var_dump($fruits->lastIndexOf('apples')); // int(3)
 ```
 
-## Adding Elements
+### Adding Elements
 
-### Single Element
+#### Single Element
 
 Add at end of list:
 
@@ -188,7 +196,7 @@ $food->addAt(1, 'Tacos');
 echo $food; // [Pizza, Tacos, French Fries, Bacon]
 ```
 
-### Multiple Elements
+#### Multiple Elements
 
 Add at end of list:
 
@@ -206,9 +214,9 @@ $food->addAllAt(1, ['Burgers', 'Tacos']);
 echo $food; // [Pizza, Burgers, Tacos, French Fries, Bacon]
 ```
 
-## Removing Elements
+### Removing Elements
 
-### Single Element
+#### Single Element
 
 By element:
 
@@ -226,7 +234,7 @@ $food->removeAt(1);
 echo $food; // [Pizza, Bacon]
 ```
 
-### Multiple Elements
+#### Multiple Elements
 
 By collection:
 
@@ -244,7 +252,7 @@ $food->removeRange(1, 3);
 echo $food; // [Pizza, Bacon]
 ```
 
-## Interfaces
+### Interfaces
 
 `ArrayList` implements the following interfaces:
 
@@ -253,16 +261,16 @@ echo $food; // [Pizza, Bacon]
 - IteratorAggregate
 - Serializable
 
-### ArrayAccess
+#### ArrayAccess
 
-#### Get
+##### Get
 
 ```php
 $letters = new ArrayList(['a', 'b', 'c', 'd']);
 echo $letters[0]; // a
 ```
 
-#### Set
+##### Set
 
 ```php
 $letters = new ArrayList(['a', 'b', 'c']);
@@ -272,7 +280,7 @@ $letters[3] = 'd';
 echo $letters; // [a, b, c, d]
 ```
 
-#### Isset
+##### Isset
 
 ```php
 $letters = new ArrayList(['a', 'b', 'c', 'd']);
@@ -280,7 +288,7 @@ var_dump(isset($letters[0])); // bool(true)
 var_dump(isset($letters[4])); // bool(false)
 ```
 
-#### Unset
+##### Unset
 
 ```php
 $letters = new ArrayList(['a', 'b', 'c', 'd']);
@@ -288,21 +296,21 @@ unset($letters[3]);
 echo $letters; // [a, b, c]
 ```
 
-### Countable
+#### Countable
 
 ```php
 $letters = new ArrayList(['a', 'b', 'c', 'd']);
 echo count($letters); // 4
 ```
 
-### IteratorAggregate
+#### IteratorAggregate
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);
 foreach ($numbers as $number) echo $number; // 1234
 ```
 
-### Serializable
+#### Serializable
 
 ```php
 $numbers = new ArrayList([1, 2, 3, 4]);

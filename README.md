@@ -6,10 +6,10 @@
 
 Method                                  | Description
 ----------------------------------------|----------------------
-__construct($collection)                |
-__toString()                            |
-add($element)                           |
-addAll($collection)                     |
+__construct($collection)                | Constructs a list containing the elements of the specified collection.
+__toString()                            | Returns a string representation of this list.
+add($element)                           | Appends the specified element to the end of this list.
+addAll($collection)                     | Appends all of the elements in the specified collection to the end of this list.
 addAllAt($index, $collection)           |
 addAt($index, $element)                 |
 clear()                                 |

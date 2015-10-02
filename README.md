@@ -31,16 +31,16 @@ Type | Method | Description
 
 ### Interface
 
-Method                                  | Description
-----------------------------------------|----------------------
-count()                                 | Returns the number of elements in this list.
-getIterator()                           | Returns an iterator over the elements in this list.
-offsetExists($index)                    | Returns true if this index exists.
-offsetGet($index)                       | Returns the element at the specified position in this list.
-offsetSet($index, $element)             | Replaces the element at the specified position in this list with the specified element.
-offsetUnset($index)                     | Removes the element at the specified position in this list.
-serialize()                             | Returns the string representation of this list.
-unserialize($serialized)                | Called during unserialization of this list.
+Type | Method | Description
+-----|--------|------------
+`int` | count() | Returns the number of elements in this list.
+`ArrayIterator` | getIterator() | Returns an iterator over the elements in this list.
+`bool` | offsetExists($index) | Returns true if this index exists.
+`mixed` | offsetGet($index) | Returns the element at the specified position in this list.
+`void` | offsetSet($index, $element) | Replaces the element at the specified position in this list with the specified element.
+`void` | offsetUnset($index) | Removes the element at the specified position in this list.
+`string` | serialize() | Returns the string representation of this list.
+`void` | unserialize($serialized) | Called during unserialization of this list.
 
 ## Creating an ArrayList
 

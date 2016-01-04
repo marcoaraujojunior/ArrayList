@@ -1,0 +1,22 @@
+{
+    "name": "mscribellito/ArrayList",
+    "description": "ArrayList is an implementation of a list, backed by an array. It provides methods for adding, removing, searching and sorting elements.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Scribellito",
+            "email": "mscribellito@gmail.com",
+            "homepage": "http://mscribellito.com",
+            "role": "Author"
+        },
+        {
+            "name": "Marco Araujo",
+            "email": "marco.araujo.junior@gmail.com",
+            "role": "Contributor"
+        },
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php" : ">=5.4"
+    }
+}

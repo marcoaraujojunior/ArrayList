@@ -13,7 +13,7 @@
             "name": "Marco Araujo",
             "email": "marco.araujo.junior@gmail.com",
             "role": "Contributor"
-        },
+        }
     ],
     "minimum-stability": "dev",
     "require": {
